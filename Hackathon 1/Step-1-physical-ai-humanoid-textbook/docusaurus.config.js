@@ -75,6 +75,24 @@ const config = {
           },
           {
             type: 'docSidebar',
+            sidebarId: 'module2Sidebar',
+            position: 'left',
+            label: 'Module 2: Digital Twin',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'module3Sidebar',
+            position: 'left',
+            label: 'Module 3: AI-Robot Brain',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'module4Sidebar',
+            position: 'left',
+            label: 'Module 4: VLA Pipeline',
+          },
+          {
+            type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
             label: 'Textbook',
@@ -96,6 +114,18 @@ const config = {
               {
                 label: 'Module 1: ROS 2 Fundamentals',
                 to: '/docs/module-1/intro',
+              },
+              {
+                label: 'Module 2: Digital Twin',
+                to: '/docs/module-2/index',
+              },
+              {
+                label: 'Module 3: AI-Robot Brain',
+                to: '/docs/module-3/index',
+              },
+              {
+                label: 'Module 4: VLA Pipeline',
+                to: '/docs/module-4/index',
               },
             ],
           },

@@ -1,6 +1,37 @@
-# Physical-AI & Humanoid-Robotics Textbook - Module 1
+# Physical AI & Humanoid Robotics Textbook
 
-This repository contains the Physical-AI & Humanoid-Robotics textbook, with the first module focusing on ROS 2 fundamentals for humanoid robotics.
+This repository contains educational content for Physical AI & Humanoid Robotics, structured as a comprehensive textbook with interactive labs and examples.
+
+## Project Overview
+
+This textbook is structured into multiple modules covering essential concepts in physical AI and humanoid robotics:
+
+- **Module 1**: ROS 2 Fundamentals for Humanoid Robotics
+- **Module 2**: The Digital Twin (Simulation Environment)
+- **Module 3**: AI-Robot Brain (Perception & Navigation)
+- **Module 4**: Vision-Language-Action Pipeline (VLA) - *Newly implemented*
+
+## Module 4: Vision-Language-Action Pipeline
+
+Module 4 has been newly implemented and includes:
+
+### Chapters:
+1. **Speech Processing for Robotics**: Implementing speech-to-text conversion using OpenAI's Whisper
+2. **LLM-Based Task Planning**: Creating planning systems using Large Language Models
+3. **Vision-Action Integration**: Connecting computer vision with action execution
+4. **Safety and Action Validation**: Implementing safety validation systems for VLA pipelines
+
+### Features:
+- Complete ROS 2 implementation for each component
+- Hands-on lab exercises for practical learning
+- Academic citations following APA format
+- Comprehensive comprehension checks
+- Safety-first design with multiple validation layers
+
+### Architecture:
+The Vision-Language-Action (VLA) pipeline connects natural language commands with robot actions through a series of processing stages, with safety validation at multiple points.
+
+For more details, see the architecture diagram at `docusaurus/docs/module-4/vla-pipeline-diagram.md`
 
 ## Module 1: ROS 2 Fundamentals for Humanoid Robotics
 
@@ -122,6 +153,10 @@ Complete lab exercises are available in the `module-1/` directory:
 
 ```
 ├── module-1/                 # Module 1 content and lab exercises
+├── docusaurus/docs/module-1/ # Docusaurus documentation for Module 1
+├── docusaurus/docs/module-2/ # Docusaurus documentation for Module 2
+├── docusaurus/docs/module-3/ # Docusaurus documentation for Module 3
+├── docusaurus/docs/module-4/ # Docusaurus documentation for Module 4 (VLA Pipeline)
 ├── examples/                 # Python examples for each chapter
 ├── assets/                   # Diagrams and images
 ├── docusaurus/              # Docusaurus documentation site

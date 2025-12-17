@@ -11,7 +11,7 @@ const sidebars = {
   module2Sidebar: [
     {
       type: 'doc',
-      id: 'module-2/index', // This would be the main module page
+      id: 'module-2/index',
       label: 'Module 2: The Digital Twin (Simulation Environment)',
     },
     {
@@ -25,8 +25,18 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'module-2/chapter-1/lab-exercise',
-          label: 'Lab: Setting up Isaac Sim and Gazebo',
+          id: 'module-2/chapter-1/isaac-sim-lab',
+          label: 'Lab: Isaac Sim Setup',
+        },
+        {
+          type: 'doc',
+          id: 'module-2/chapter-1/gazebo-lab',
+          label: 'Lab: Gazebo Setup',
+        },
+        {
+          type: 'doc',
+          id: 'module-2/chapter-1/comprehension-checks',
+          label: 'Comprehension Checks',
         },
       ],
     },
@@ -41,8 +51,8 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'module-2/chapter-2/lab-exercise',
-          label: 'Lab: Configuring Physics Parameters',
+          id: 'module-2/chapter-2/comprehension-checks',
+          label: 'Comprehension Checks',
         },
       ],
     },
@@ -57,8 +67,8 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'module-2/chapter-3/lab-exercise',
-          label: 'Lab: Setting up Virtual Sensors',
+          id: 'module-2/chapter-3/comprehension-checks',
+          label: 'Comprehension Checks',
         },
       ],
     },
@@ -73,8 +83,8 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'module-2/chapter-4/lab-exercise',
-          label: 'Lab: Robot State Visualization',
+          id: 'module-2/chapter-4/comprehension-checks',
+          label: 'Comprehension Checks',
         },
       ],
     },
@@ -82,7 +92,7 @@ const sidebars = {
   module3Sidebar: [
     {
       type: 'doc',
-      id: 'module-3/index', // This would be the main module page
+      id: 'module-3/index',
       label: 'Module 3: The AI-Robot Brain (Perception & Navigation)',
     },
     {
@@ -96,8 +106,13 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'module-3/chapter-1/lab-exercise',
+          id: 'module-3/chapter-1/gazebo-lab',
           label: 'Lab: Creating Complex Simulation Scenes',
+        },
+        {
+          type: 'doc',
+          id: 'module-3/chapter-1/comprehension-checks',
+          label: 'Comprehension Checks',
         },
       ],
     },
@@ -110,11 +125,6 @@ const sidebars = {
           id: 'module-3/chapter-2/chapter2',
           label: 'Perception Pipeline Components',
         },
-        {
-          type: 'doc',
-          id: 'module-3/chapter-2/lab-exercise',
-          label: 'Lab: Object Detection and SLAM',
-        },
       ],
     },
     {
@@ -126,11 +136,6 @@ const sidebars = {
           id: 'module-3/chapter-3/chapter3',
           label: 'Navigation with Nav2',
         },
-        {
-          type: 'doc',
-          id: 'module-3/chapter-3/lab-exercise',
-          label: 'Lab: Configuring Nav2 and Path Planning',
-        },
       ],
     },
     {
@@ -141,11 +146,6 @@ const sidebars = {
           type: 'doc',
           id: 'module-3/chapter-4/chapter4',
           label: 'Bridging Simulation and Reality',
-        },
-        {
-          type: 'doc',
-          id: 'module-3/chapter-4/lab-exercise',
-          label: 'Lab: Sim-to-Real Validation',
         },
       ],
     },
@@ -162,7 +162,7 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'module-4/chapter-1/chapter1',
+          id: 'module-4/chapter-1/index',
           label: 'Speech-to-Text Conversion',
         },
         {
@@ -178,7 +178,7 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'module-4/chapter-2/chapter2',
+          id: 'module-4/chapter-2/index',
           label: 'Large Language Models for Planning',
         },
         {
@@ -194,7 +194,7 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'module-4/chapter-3/chapter3',
+          id: 'module-4/chapter-3/index',
           label: 'Linking Vision and Action',
         },
         {
@@ -210,13 +210,34 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'module-4/chapter-4/chapter4',
+          id: 'module-4/chapter-4/index',
           label: 'Validation and Safety Mechanisms',
         },
         {
           type: 'doc',
           id: 'module-4/chapter-4/lab-exercise',
           label: 'Lab: Implementing Safety Validation Layers',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Additional Resources',
+      items: [
+        {
+          type: 'doc',
+          id: 'module-4/comprehension-checks',
+          label: 'Comprehension Checks',
+        },
+        {
+          type: 'doc',
+          id: 'module-4/citations',
+          label: 'Academic Citations',
+        },
+        {
+          type: 'doc',
+          id: 'module-4/vla-pipeline-diagram',
+          label: 'VLA Pipeline Diagram',
         },
       ],
     },
