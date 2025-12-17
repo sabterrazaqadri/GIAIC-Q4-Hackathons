@@ -91,8 +91,8 @@ This tasks document breaks down the implementation of Modules 2-4 of the Physica
 - [X] T077 [US1] Verify academic citations for chapter 3 (min 5-7 sources)
 
 ### Module 2.4: Visualization
-- [ ] T080 [P] [US1] Research visualization tools and techniques
-- [ ] T081 [P] [US1] Document visualization parameters and best practices
+- [X] T080 [P] [US1] Research visualization tools and techniques
+- [X] T081 [P] [US1] Document visualization parameters and best practices
 - [ ] T082 [US1] Create chapter 4 content: Visualization for Human-Robot Interaction
 - [ ] T083 [P] [US1] Write lab exercise: Robot state visualization
 - [ ] T084 [P] [US1] Create visualization scenarios
