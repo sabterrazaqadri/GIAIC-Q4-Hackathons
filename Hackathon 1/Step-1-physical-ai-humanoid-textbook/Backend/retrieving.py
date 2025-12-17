@@ -22,7 +22,7 @@ def get_embedding(text):
 def retrieve(query):
     embedding = get_embedding(query)
     result = qdrant.query_points(
-        collection_name="humanoid_ai_book_two",
+        collection_name="physical_ai_humanoid_textbook",
         query=embedding,
         limit=5
     )

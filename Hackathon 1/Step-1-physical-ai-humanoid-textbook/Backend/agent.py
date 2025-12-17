@@ -2,23 +2,21 @@ from agents import Agent, Runner, OpenAIChatCompletionsModel, AsyncOpenAI
 from agents import set_tracing_disabled, function_tool
 import os
 from dotenv import load_dotenv
-from agents import enable_verbose_stdout_logging
 
-enable_verbose_stdout_logging()
 
 load_dotenv()
 set_tracing_disabled(disabled=True)
 
-gemini_api_key = os.getenv("GEMINI_API_KEY")
-provider = AsyncOpenAI(
-    api_key=gemini_api_key,
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
-)
+# gemini_api_key = os.getenv("GEMINI_API_KEY")
+# provider = AsyncOpenAI(
+#     api_key=gemini_api_key,
+#     base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+# )
 
-model = OpenAIChatCompletionsModel(
-    model="gemini-2.0-flash",
-    openai_client=provider
-)
+# model = OpenAIChatCompletionsModel(
+#     model="gemini-2.0-flash",
+#     openai_client=provider
+# )
 
 import cohere
 from qdrant_client import QdrantClient
@@ -44,14 +42,15 @@ def get_embedding(text):
 
 
 @function_tool
-def retrieve(query):
+def retrieve(query: str) -> list[str]:
     embedding = get_embedding(query)
     result = qdrant.query_points(
-        collection_name="humanoid_ai_book",
+        collection_name="physical_ai_humanoid_textbook",
         query=embedding,
         limit=5
     )
     return [point.payload["text"] for point in result.points]
+
 
 
 
@@ -63,14 +62,13 @@ To answer the user question, first call the tool `retrieve` with the user query.
 Use ONLY the returned content from `retrieve` to answer.
 If the answer is not in the retrieved content, say "I don't know".
 """,
-    model=model,
     tools=[retrieve]
 )
 
 
 result = Runner.run_sync(
     agent,
-    input="what is physical ai?",
+    input="what is URDF Fundamentals?",
 )
 
 print(result.final_output)
