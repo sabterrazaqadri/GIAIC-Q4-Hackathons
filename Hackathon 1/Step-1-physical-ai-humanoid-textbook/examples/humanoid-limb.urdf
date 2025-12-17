@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<robot name="humanoid_limb">
+  <!-- Torso link (root) -->
+  <link name="torso">
+    <visual>
+      <geometry>
+        <box size="0.3 0.2 0.5"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.3 0.2 0.5"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0.5" ixy="0" ixz="0" iyy="0.5" iyz="0" izz="0.5"/>
+    </inertial>
+  </link>
+
+  <!-- Right upper arm -->
+  <link name="right_upper_arm">
+    <visual>
+      <geometry>
+        <cylinder length="0.3" radius="0.05"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.3" radius="0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2"/>
+      <inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- Right lower arm -->
+  <link name="right_lower_arm">
+    <visual>
+      <geometry>
+        <cylinder length="0.25" radius="0.04"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.25" radius="0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.5"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.0008"/>
+    </inertial>
+  </link>
+
+  <!-- Right hand -->
+  <link name="right_hand">
+    <visual>
+      <geometry>
+        <box size="0.12 0.08 0.05"/>
+      </geometry>
+      <material name="skin">
+        <color rgba="1 0.8 0.6 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.12 0.08 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.0005" ixy="0" ixz="0" iyy="0.0005" iyz="0" izz="0.0005"/>
+    </inertial>
+  </link>
+
+  <!-- Right shoulder joint (connecting torso to upper arm) -->
+  <joint name="right_shoulder_joint" type="revolute">
+    <parent link="torso"/>
+    <child link="right_upper_arm"/>
+    <origin xyz="0.15 -0.1 -0.1" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="100" velocity="2"/>
+  </joint>
+
+  <!-- Right elbow joint (connecting upper arm to lower arm) -->
+  <joint name="right_elbow_joint" type="revolute">
+    <parent link="right_upper_arm"/>
+    <child link="right_lower_arm"/>
+    <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="0" upper="3.14" effort="50" velocity="2"/>
+  </joint>
+
+  <!-- Right wrist joint (connecting lower arm to hand) -->
+  <joint name="right_wrist_joint" type="revolute">
+    <parent link="right_lower_arm"/>
+    <child link="right_hand"/>
+    <origin xyz="0 0 -0.25" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="20" velocity="2"/>
+  </joint>
+</robot>

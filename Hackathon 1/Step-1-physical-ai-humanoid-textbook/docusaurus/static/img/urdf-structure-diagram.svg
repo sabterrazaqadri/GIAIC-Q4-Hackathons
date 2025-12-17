@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800"
+   height="600"
+   viewBox="0 0 800 600"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="urdf-structure-diagram.svg"
+   inkscape:version="1.0.2 (e86c3acc3a, 2021-01-14)">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>URDF Structure Diagram</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="0.78"
+     inkscape:cx="400"
+     inkscape:cy="300"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <title
+     id="title2">URDF Structure Diagram</title>
+  <desc
+     id="desc4">Diagram showing the hierarchical structure of a URDF file for a humanoid robot</desc>
+  <rect
+     style="fill:#ffffff;stroke:#000000;stroke-width:2"
+     id="rect833"
+     width="790"
+     height="590"
+     x="5"
+     y="5" />
+  <g
+     id="robot-root"
+     transform="translate(350,100)">
+    <rect
+       style="fill:#aaccff;stroke:#000000;stroke-width:2"
+       id="rect835"
+       width="100"
+       height="100"
+       x="0"
+       y="0"
+       ry="20" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+       x="10"
+       y="55"
+       id="text839"><tspan
+         id="tspan837"
+         x="10"
+         y="55">robot</tspan><tspan
+         x="10"
+         y="72.5"
+         id="tspan841">root</tspan></text>
+  </g>
+  <g
+     id="torso"
+     transform="translate(350,200)">
+    <rect
+       style="fill:#aaccff;stroke:#000000;stroke-width:2"
+       id="rect835-3"
+       width="100"
+       height="150"
+       x="0"
+       y="0"
+       ry="20" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+       x="15"
+       y="80"
+       id="text839-6"><tspan
+         id="tspan837-7"
+         x="15"
+         y="80">torso</tspan></text>
+  </g>
+  <g
+     id="head"
+     transform="translate(375,50)">
+    <circle
+       style="fill:#aaccff;stroke:#000000;stroke-width:2"
+       id="path843"
+       cx="25"
+       cy="25"
+       r="25" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+       x="5"
+       y="30"
+       id="text847"><tspan
+         id="tspan845"
+         x="5"
+         y="30">head</tspan></text>
+  </g>
+  <g
+     id="left-arm"
+     transform="translate(250,210)">
+    <rect
+       style="fill:#aaccff;stroke:#000000;stroke-width:2"
+       id="rect835-5"
+       width="50"
+       height="120"
+       x="0"
+       y="0"
+       ry="15" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+       x="-10"
+       y="60"
+       id="text839-3"
+       transform="rotate(-90,5.0000001,60)"><tspan
+         id="tspan837-5"
+         x="-10"
+         y="60">left_arm</tspan></text>
+  </g>
+  <g
+     id="right-arm"
+     transform="translate(450,210)">
+    <rect
+       style="fill:#aaccff;stroke:#000000;stroke-width:2"
+       id="rect835-5-6"
+       width="50"
+       height="120"
+       x="0"
+       y="0"
+       ry="15" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+       x="-10"
+       y="60"
+       id="text839-3-2"
+       transform="rotate(-90,5.0000001,60)"><tspan
+         id="tspan837-5-9"
+         x="-10"
+         y="60">right_arm</tspan></text>
+  </g>
+  <g
+     id="left-leg"
+     transform="translate(330,350)">
+    <rect
+       style="fill:#aaccff;stroke:#000000;stroke-width:2"
+       id="rect835-0"
+       width="40"
+       height="150"
+       x="0"
+       y="0"
+       ry="15" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+       x="-10"
+       y="75"
+       id="text839-62"
+       transform="rotate(-90,0,75)"><tspan
+         id="tspan837-6"
+         x="-10"
+         y="75">left_leg</tspan></text>
+  </g>
+  <g
+     id="right-leg"
+     transform="translate(390,350)">
+    <rect
+       style="fill:#aaccff;stroke:#000000;stroke-width:2"
+       id="rect835-0-1"
+       width="40"
+       height="150"
+       x="0"
+       y="0"
+       ry="15" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+       x="-10"
+       y="75"
+       id="text839-62-8"
+       transform="rotate(-90,0,75)"><tspan
+         id="tspan837-6-7"
+         x="-10"
+         y="75">right_leg</tspan></text>
+  </g>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4, 4;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1234)"
+     d="M 400,200 C 400,180 400,160 400,150"
+     id="path888" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4, 4;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1234)"
+     d="M 400,200 C 370,200 350,200 325,210"
+     id="path890" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4, 4;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1234)"
+     d="M 400,200 C 430,200 450,200 475,210"
+     id="path892" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4, 4;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1234)"
+     d="M 400,350 C 370,350 350,350 350,350"
+     id="path894" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4, 4;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1234)"
+     d="M 400,350 C 430,350 450,350 450,350"
+     id="path896" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="50"
+     y="50"
+     id="text900"><tspan
+       id="tspan898"
+       x="50"
+       y="50">URDF Hierarchical Structure for Humanoid Robot</tspan></text>
+  <g
+     id="urdf-xml"
+     transform="translate(50,100)">
+    <rect
+       style="fill:#f0f0f0;stroke:#000000;stroke-width:1"
+       id="rect902"
+       width="250"
+       height="360"
+       x="0"
+       y="0"
+       ry="10" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+       x="10"
+       y="20"
+       id="text904"><tspan
+         id="tspan906"
+         x="10"
+         y="20">&lt;robot name=&quot;humanoid&quot;&gt;</tspan><tspan
+         id="tspan908"
+         x="10"
+         y="35">  &lt;link name=&quot;torso&quot;&gt;</tspan><tspan
+         id="tspan910"
+         x="10"
+         y="50">    &lt;visual&gt;...&lt;/visual&gt;</tspan><tspan
+         id="tspan912"
+         x="10"
+         y="65">    &lt;collision&gt;...&lt;/collision&gt;</tspan><tspan
+         id="tspan914"
+         x="10"
+         y="80">    &lt;inertial&gt;...&lt;/inertial&gt;</tspan><tspan
+         id="tspan916"
+         x="10"
+         y="95">  &lt;/link&gt;</tspan><tspan
+         id="tspan918"
+         x="10"
+         y="110">  </tspan><tspan
+         id="tspan920"
+         x="10"
+         y="125">  &lt;joint name=&quot;head_joint&quot; type=&quot;revolute&quot;&gt;</tspan><tspan
+         id="tspan922"
+         x="10"
+         y="140">    &lt;parent link=&quot;torso&quot;/&gt;</tspan><tspan
+         id="tspan924"
+         x="10"
+         y="155">    &lt;child link=&quot;head&quot;/&gt;</tspan><tspan
+         id="tspan926"
+         x="10"
+         y="170">    &lt;origin xyz=&quot;0 0 0.4&quot;/&gt;</tspan><tspan
+         id="tspan928"
+         x="10"
+         y="185">    &lt;axis xyz=&quot;0 1 0&quot;/&gt;</tspan><tspan
+         id="tspan930"
+         x="10"
+         y="200">    &lt;limit ... /&gt;</tspan><tspan
+         id="tspan932"
+         x="10"
+         y="215">  &lt;/joint&gt;</tspan><tspan
+         id="tspan934"
+         x="10"
+         y="230">  </tspan><tspan
+         id="tspan936"
+         x="10"
+         y="245">  &lt;link name=&quot;head&quot;&gt;</tspan><tspan
+         id="tspan938"
+         x="10"
+         y="260">    ...</tspan><tspan
+         id="tspan940"
+         x="10"
+         y="275">  &lt;/link&gt;</tspan><tspan
+         id="tspan942"
+         x="10"
+         y="290">  </tspan><tspan
+         id="tspan944"
+         x="10"
+         y="305">  &lt;joint name=&quot;left_shoulder&quot; type=&quot;revolute&quot;&gt;</tspan><tspan
+         id="tspan946"
+         x="10"
+         y="320">    ...</tspan><tspan
+         id="tspan948"
+         x="10"
+         y="335">  &lt;/joint&gt;</tspan><tspan
+         id="tspan950"
+         x="10"
+         y="350">  ...</tspan><tspan
+         id="tspan952"
+         x="10"
+         y="365">&lt;/robot&gt;</tspan></text>
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="50"
+     y="500"
+     id="text954"><tspan
+       id="tspan956"
+       x="50"
+       y="500">URDF XML Structure (simplified)</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="500"
+     y="500"
+     id="text958"><tspan
+       id="tspan960"
+       x="500"
+       y="500">Visual Representation</tspan></text>
+  <defs
+     id="defs908">
+    <marker
+       id="marker1234"
+       markerWidth="13"
+       markerHeight="13"
+       refX="10"
+       refY="6"
+       orient="auto">
+      <path
+         d="M0,0 L10,6 L0,12 Z"
+         fill="#000000"
+         id="path1235" />
+    </marker>
+  </defs>
+</svg>
