@@ -287,10 +287,16 @@ This chapter covered the critical role of visualization in human-robot interacti
 
 ## References
 
-1. Goodrich, M. A., & Schultz, A. C. (2007). Human-robot interaction: a survey. Foundations and Trends in Human-Computer Interaction.
-2. Siciliano, B., & Khatib, O. (2016). Springer Handbook of Robotics. Springer.
-3. Breazeal, C. (2002). Designing Sociable Robots. MIT Press.
-4. Mutlu, B., & Forlizzi, J. (2008). Designing for engagements: a study of robot appearance, initial interactions, and user perception. CHI Workshop on Designing for Human-Robot Interaction.
-5. Quigley, M., et al. (2009). RViz: An Extensible Visualization Tool for Robotics. ICRA Workshop on Open Source Software.
-6. NVIDIA. (2024). Isaac Sim Visualization Guide. NVIDIA Developer Documentation.
-7. ISO. (2017). ISO 13482:2017 - Robots and robotic devices - Personal care robots. International Organization for Standardization.
+1. Goodrich, M. A., & Schultz, A. C. (2007). Human-robot interaction: a survey. Foundations and Trends in Human-Computer Interaction. This seminal paper provides a comprehensive overview of the field of human-robot interaction, covering fundamental concepts and research directions.
+
+2. Siciliano, B., & Khatib, O. (2016). Springer Handbook of Robotics. Springer. A comprehensive reference covering all aspects of robotics, including human-robot interaction and visualization techniques.
+
+3. Breazeal, C. (2002). Designing Sociable Robots. MIT Press. This influential work explores how robots can be designed to interact socially with humans, with insights relevant to visualization for communication.
+
+4. Mutlu, B., & Forlizzi, J. (2008). Designing for engagements: a study of robot appearance, initial interactions, and user perception. CHI Workshop on Designing for Human-Robot Interaction. This paper examines how robot appearance and initial interactions affect user perceptions, relevant for visualization design.
+
+5. Quigley, M., et al. (2009). RViz: An Extensible Visualization Tool for Robotics. ICRA Workshop on Open Source Software. The official paper on RViz, the standard visualization tool in ROS environments.
+
+6. NVIDIA. (2024). Isaac Sim Visualization Guide. NVIDIA Developer Documentation. Official documentation outlining visualization capabilities and best practices in Isaac Sim, a leading robotics simulation platform.
+
+7. ISO. (2017). ISO 13482:2017 - Robots and robotic devices - Personal care robots. International Organization for Standardization. International safety standard specifically addressing personal care robots and their interaction with humans.
