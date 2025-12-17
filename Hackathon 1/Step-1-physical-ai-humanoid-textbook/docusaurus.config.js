@@ -8,7 +8,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-username.github.io', // TODO: Update with actual GitHub Pages URL
+  url: 'https://physical-ai-humanoid-textbook-mu.vercel.app/', // TODO: Update with actual GitHub Pages URL
   // Set the /<base> pathname under which your site is served
   // For GitHub Pages, this is usually /<repository-name>/
   baseUrl: '/giaic-physical-ai-humanoid-textbook/',

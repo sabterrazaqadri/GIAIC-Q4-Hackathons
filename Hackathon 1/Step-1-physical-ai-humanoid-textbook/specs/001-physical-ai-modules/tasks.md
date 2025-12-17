@@ -64,31 +64,31 @@ This tasks document breaks down the implementation of Modules 2-4 of the Physica
 - [ ] T050 [P] [US1] Research and document Isaac Sim setup requirements
 - [ ] T051 [P] [US1] Research and document Gazebo setup requirements
 - [X] T052 [US1] Create chapter 1 content: Introduction to Simulation Environments
-- [ ] T053 [P] [US1] Write lab exercise: Isaac Sim basic environment setup
-- [ ] T054 [P] [US1] Write lab exercise: Gazebo basic environment setup
-- [ ] T055 [US1] Create comprehension checks for chapter 1
-- [ ] T056 [P] [US1] Create diagram: Simulation environment comparison
+- [X] T053 [P] [US1] Write lab exercise: Isaac Sim basic environment setup
+- [X] T054 [P] [US1] Write lab exercise: Gazebo basic environment setup
+- [X] T055 [US1] Create comprehension checks for chapter 1
+- [X] T056 [P] [US1] Create diagram: Simulation environment comparison
 - [X] T057 [US1] Verify academic citations for chapter 1 (min 5-7 sources)
 
 ### Module 2.2: Physics Simulation
-- [ ] T060 [P] [US1] Research physics parameters for humanoid simulation
-- [ ] T061 [P] [US1] Document gravity, time step, and solver settings
-- [ ] T062 [US1] Create chapter 2 content: Physics Simulation Concepts
-- [ ] T063 [P] [US1] Write lab exercise: Configuring physics parameters
-- [ ] T064 [P] [US1] Create simulation scenario: Basic humanoid physics
-- [ ] T065 [US1] Create comprehension checks for chapter 2
-- [ ] T066 [P] [US1] Create diagram: Physics simulation parameters
-- [ ] T067 [US1] Verify academic citations for chapter 2 (min 5-7 sources)
+- [X] T060 [P] [US1] Research physics parameters for humanoid simulation
+- [X] T061 [P] [US1] Document gravity, time step, and solver settings
+- [X] T062 [US1] Create chapter 2 content: Physics Simulation Concepts
+- [X] T063 [P] [US1] Write lab exercise: Configuring physics parameters
+- [X] T064 [P] [US1] Create simulation scenario: Basic humanoid physics
+- [X] T065 [US1] Create comprehension checks for chapter 2
+- [X] T066 [P] [US1] Create diagram: Physics simulation parameters
+- [X] T067 [US1] Verify academic citations for chapter 2 (min 5-7 sources)
 
 ### Module 2.3: Sensor Simulation
-- [ ] T070 [P] [US1] Research sensor types for humanoid robots (LiDAR, cameras, IMU)
-- [ ] T071 [P] [US1] Document sensor parameters and configurations
-- [ ] T072 [US1] Create chapter 3 content: Sensor Simulation
-- [ ] T073 [P] [US1] Write lab exercise: Setting up virtual sensors
-- [ ] T074 [P] [US1] Create sensor simulation scenarios
-- [ ] T075 [US1] Create comprehension checks for chapter 3
-- [ ] T076 [P] [US1] Create diagram: Sensor simulation pipeline
-- [ ] T077 [US1] Verify academic citations for chapter 3 (min 5-7 sources)
+- [X] T070 [P] [US1] Research sensor types for humanoid robots (LiDAR, cameras, IMU)
+- [X] T071 [P] [US1] Document sensor parameters and configurations
+- [X] T072 [US1] Create chapter 3 content: Sensor Simulation
+- [X] T073 [P] [US1] Write lab exercise: Setting up virtual sensors
+- [X] T074 [P] [US1] Create sensor simulation scenarios
+- [X] T075 [US1] Create comprehension checks for chapter 3
+- [X] T076 [P] [US1] Create diagram: Sensor simulation pipeline
+- [X] T077 [US1] Verify academic citations for chapter 3 (min 5-7 sources)
 
 ### Module 2.4: Visualization
 - [ ] T080 [P] [US1] Research visualization tools and techniques
