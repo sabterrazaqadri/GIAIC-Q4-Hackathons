@@ -46,8 +46,13 @@ Thumbs.db
 .env.local
 .env.*.local
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.cov/
+# Git
+.git/
+
+# Documentation and other files that don't need to be in the Docker image
+docusaurus/
+*.md
+.gitignore
+QWEN.md
+.specify/
+history/

@@ -41,10 +41,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/your-username/your-repo/edit/main/docusaurus/',
+          // Remove the editUrl to disable the "edit this page" links
         },
         blog: {
           showReadingTime: true,
@@ -52,10 +49,7 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/your-username/your-repo/edit/main/docusaurus/',
+          // Remove the editUrl to disable the "edit this page" links
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -89,9 +83,27 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'module2Sidebar',
+          position: 'left',
+          label: 'Module 2: Digital Twin',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'module3Sidebar',
+          position: 'left',
+          label: 'Module 3: AI-Robot Brain',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'module4Sidebar',
+          position: 'left',
+          label: 'Module 4: VLA Pipeline',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Textbook',
+          label: 'Dive Into Learning',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
@@ -110,6 +122,18 @@ const config: Config = {
             {
               label: 'Module 1: ROS 2 Fundamentals',
               to: '/docs/module-1/chapter-1-ros2-communication',
+            },
+            {
+              label: 'Module 2: Digital Twin',
+              to: '/docs/module-2/index',
+            },
+            {
+              label: 'Module 3: AI-Robot Brain',
+              to: '/docs/module-3/index',
+            },
+            {
+              label: 'Module 4: VLA Pipeline',
+              to: '/docs/module-4/index',
             },
           ],
         },

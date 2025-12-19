@@ -2,46 +2,45 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Physical-AI & Humanoid Robotics Textbook
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to the comprehensive guide on **Physical-AI & Humanoid Robotics**. This textbook will take you through the complete journey of developing AI-powered humanoid robots, from fundamental concepts to advanced Vision-Language-Action capabilities.
+
+## About This Textbook
+
+This educational resource provides a structured approach to understanding and implementing humanoid robotics systems. Each module builds upon the previous one, taking you from ROS 2 fundamentals through to advanced AI integration.
+
+## What You'll Learn
+
+- **Module 1**: ROS 2 fundamentals for humanoid robotics
+- **Module 2**: Digital twin simulation environments (Isaac Sim & Gazebo)
+- **Module 3**: AI perception and navigation systems
+- **Module 4**: Vision-Language-Action (VLA) pipelines for natural human-robot interaction
 
 ## Getting Started
 
-Get started by **creating a new site**.
+Begin your journey by exploring the modules through our structured curriculum:
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+1. Navigate to any of the **Modules** in the top navigation bar
+2. Start with **Module 1: ROS 2 Fundamentals** if you're new to robotics
+3. Progress through each module sequentially for the best learning experience
+4. Complete hands-on lab exercises to reinforce theoretical concepts
 
-### What you'll need
+## Prerequisites
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+Before diving into this textbook, you should have:
+- Basic programming knowledge (Python preferred)
+- Understanding of Linux command line
+- Familiarity with basic robotics concepts (optional but helpful)
 
-## Generate a new site
+## Learning Approach
 
-Generate a new Docusaurus site using the **classic template**.
+Each module includes:
+- Theoretical foundations
+- Practical implementation guides
+- Lab exercises to apply concepts
+- Comprehension checks to validate understanding
 
-The classic template will automatically be added to your project after you run the command:
+## Ready to Begin?
 
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Navigate through the modules using the sidebar or explore the complete curriculum from the **Dive Into Learning** section above. Start your journey toward mastering Physical-AI & Humanoid Robotics today!
