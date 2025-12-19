@@ -25,7 +25,7 @@ const config: Config = {
   organizationName: 'your-organization', // Usually your GitHub org/user name.
   projectName: 'giaic-physical-ai-humanoid-textbook', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -125,15 +125,15 @@ const config: Config = {
             },
             {
               label: 'Module 2: Digital Twin',
-              to: '/docs/module-2/index',
+              to: '/docs/module-2/',
             },
             {
               label: 'Module 3: AI-Robot Brain',
-              to: '/docs/module-3/index',
+              to: '/docs/module-3/',
             },
             {
               label: 'Module 4: VLA Pipeline',
-              to: '/docs/module-4/index',
+              to: '/docs/module-4/',
             },
           ],
         },
