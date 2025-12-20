@@ -1,0 +1,27 @@
+services:
+  # Backend API Service
+  - type: web
+    name: physical-ai-backend
+    runtime: docker
+    dockerfilePath: ./Backend/dockerfile
+    dockerContext: ./Backend
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: COHERE_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        value: sqlite:///./data/test.db
+      - key: TEXTBOOK_COLLECTION_NAME
+        value: textbook_content
+      - key: PORT
+        value: 8000
+    disk:
+      name: backend-data
+      mountPath: /app/data
+      sizeGB: 1
+    healthCheckPath: /health
