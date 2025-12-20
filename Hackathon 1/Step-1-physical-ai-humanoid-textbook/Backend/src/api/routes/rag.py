@@ -5,6 +5,9 @@ from src.agents.rag_agent import RAGAgent
 from src.api.models import QueryRequest, AgentResponse, ErrorResponse, BaseModel
 from pydantic import Field
 from src.config.settings import settings
+import logging
+import asyncio
+from src.services.validation_helper import validate_query_format
 
 router = APIRouter(prefix="/rag", tags=["RAG Agent"])
 
@@ -44,16 +47,38 @@ async def query_rag_agent(request: QueryRequest):
     - **confidence**: Agent's confidence level in the response (0-1)
     - **usage_stats**: Token usage statistics (optional)
     """
+    start_time = time.time()
+
     try:
+        # Use the validation helper for comprehensive validation
+        validation_result = validate_query_format(request.dict())
+        if not validation_result['is_valid']:
+            logging.warning(f"Query validation failed: {validation_result['message']}")
+            raise HTTPException(
+                status_code=400,
+                detail=validation_result['message']
+            )
+
         # Initialize the RAG agent
         rag_agent = RAGAgent()
 
-        # Process the query using the RAG agent
-        result = await rag_agent.process_query(
-            question=request.question,
-            selected_text=request.selected_text,
-            user_context=request.user_context
-        )
+        # Process the query with timeout handling
+        try:
+            result = await asyncio.wait_for(
+                rag_agent.process_query(
+                    question=request.question,
+                    selected_text=request.selected_text,
+                    user_context=request.user_context
+                ),
+                timeout=30  # Default timeout of 30 seconds
+            )
+        except asyncio.TimeoutError:
+            processing_time = time.time() - start_time
+            logging.error(f"Query timed out after {processing_time:.2f}s")
+            raise HTTPException(
+                status_code=408,  # Request Timeout
+                detail="Query processing timed out. Please try again with a simpler question."
+            )
 
         # Create and return the response
         response = AgentResponse(**result)
@@ -65,21 +90,55 @@ async def query_rag_agent(request: QueryRequest):
                 detail="Error validating agent response format"
             )
 
+        # Performance monitoring
+        processing_time = time.time() - start_time
+        logging.info(f"Query processed successfully in {processing_time:.2f}s - Question: '{request.question[:50]}{'...' if len(request.question) > 50 else ''}'")
+
+        # Log if processing time exceeds threshold (500ms as per requirements)
+        if processing_time > 0.5:
+            logging.warning(f"Slow query detected: {processing_time:.2f}s - Question: '{request.question}'")
+
         return response
 
     except HTTPException as http_ex:
-        # Re-raise HTTP exceptions as-is, they already have appropriate status codes
-        raise
-    except Exception as e:
-        # Log the error for debugging
-        import logging
-        logging.error(f"Error in RAG query endpoint: {str(e)}", exc_info=True)
+        # Performance monitoring for errors
+        processing_time = time.time() - start_time
+        logging.error(f"Query failed after {processing_time:.2f}s: {http_ex.detail}")
 
-        # Raise a 500 error for any unhandled exceptions
-        raise HTTPException(
-            status_code=500,
-            detail="Internal server error occurred while processing the query"
-        )
+        # Return structured error response
+        if http_ex.status_code == 400:
+            return ErrorResponse(
+                error="VALIDATION_ERROR",
+                message=http_ex.detail
+            )
+        elif http_ex.status_code == 408:
+            return ErrorResponse(
+                error="TIMEOUT_ERROR",
+                message=http_ex.detail
+            )
+        else:
+            # For other HTTP errors, return the same error
+            raise http_ex
+    except Exception as e:
+        # Performance monitoring for unhandled errors
+        processing_time = time.time() - start_time
+        error_msg = str(e)
+
+        # Check if this is an external service error (OpenAI, Qdrant, etc.)
+        if any(service in error_msg.lower() for service in ["openai", "api", "connection", "timeout", "rate limit"]):
+            logging.error(f"External service failure after {processing_time:.2f}s: {error_msg}", exc_info=True)
+            return ErrorResponse(
+                error="EXTERNAL_SERVICE_ERROR",
+                message="External service is temporarily unavailable. Please try again later."
+            )
+        else:
+            logging.error(f"Unhandled error in RAG query endpoint after {processing_time:.2f}s: {error_msg}", exc_info=True)
+
+            # For internal errors, return structured error response
+            return ErrorResponse(
+                error="INTERNAL_ERROR",
+                message="Internal server error occurred while processing the query"
+            )
 
 
 @router.post(
@@ -98,34 +157,24 @@ async def validate_query(request: QueryRequest):
     Validate a query without processing it, useful for external systems to check query format
     """
     try:
-        # If we get here, the Pydantic model validation has already passed
-        # We can perform additional custom validations if needed
-        if not request.question or len(request.question.strip()) == 0:
+        # Use the validation helper for comprehensive validation
+        validation_result = validate_query_format(request.dict())
+
+        # Map the validation result to the appropriate response format
+        if validation_result['is_valid']:
+            return QueryValidationResponse(
+                valid=True,
+                message="Query is valid"
+            )
+        else:
+            # Log validation failures
+            logging.warning(f"Query validation failed: {validation_result['message']}")
             return QueryValidationResponse(
                 valid=False,
-                message="Question field is required and cannot be empty"
+                message=validation_result['message']
             )
-
-        if len(request.question) > 2000:
-            return QueryValidationResponse(
-                valid=False,
-                message="Question length exceeds maximum allowed characters (2000)"
-            )
-
-        if request.selected_text and len(request.selected_text) > 5000:
-            return QueryValidationResponse(
-                valid=False,
-                message="Selected text length exceeds maximum allowed characters (5000)"
-            )
-
-        # If all validations pass
-        return QueryValidationResponse(
-            valid=True,
-            message="Query is valid"
-        )
 
     except Exception as e:
-        import logging
         logging.error(f"Error in query validation endpoint: {str(e)}", exc_info=True)
 
         raise HTTPException(

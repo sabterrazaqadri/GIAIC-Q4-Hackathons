@@ -1,45 +1,68 @@
-from fastapi import FastAPI, HTTPException
-from src.api.v1.endpoints import router as api_router
-import src.config.settings as settings
-from src.utils.logging import setup_logging
+"""
+Main application entry point for the ChatKit RAG integration.
+Based on the implementation plan in plan.md.
+"""
+import logging
+from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 
-# Initialize the FastAPI app
+from .chat.endpoints import router as chat_router
+from .chat.services import get_chat_service
+from .rag.services import get_rag_service
+from .core.config import settings
+from .core.exceptions import ChatKitRAGException, setup_logging
+from .core.rate_limiter import rate_limit_middleware
+
+# Set up logging
+setup_logging()
+
+# Create the FastAPI app
 app = FastAPI(
-    title="RAG Backend for Physical-AI & Humanoid Robotics Textbook",
-    description="Backend service for crawling, chunking, embedding, and storing textbook content",
-    version="1.0.0"
+    title=settings.PROJECT_NAME,
+    version=settings.VERSION,
+    description="API for integrating OpenAI ChatKit with the RAG system for the Physical AI & Humanoid Robotics textbook"
 )
 
-# Include the API router
-app.include_router(api_router, prefix="/api/v1")
+# Add rate limiting middleware first (so it's executed first)
+app.middleware("http")(rate_limit_middleware)
 
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, replace with specific origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    # Expose custom headers if needed
+    # expose_headers=["Access-Control-Allow-Origin"]
+)
+
+# Include API routers
+app.include_router(chat_router, prefix=settings.API_V1_STR)
+
+# Add exception handlers
+@app.exception_handler(ChatKitRAGException)
+async def chatkit_rag_exception_handler(request, exc: ChatKitRAGException):
+    return {
+        "error": {
+            "message": exc.message,
+            "type": exc.__class__.__name__,
+            "code": exc.error_code
+        }
+    }
+
+
+# Health check endpoint
 @app.get("/")
-def read_root():
-    return {"message": "RAG Backend for Physical-AI & Humanoid Robotics Textbook"}
+async def root():
+    return {"message": "ChatKit RAG Integration API", "version": settings.VERSION}
 
-@app.on_event("startup")
-async def startup_event():
-    # Initialize logging
-    logger = setup_logging()
 
-    # Validate configuration
-    try:
-        # Check that required settings are present
-        if not settings.cohere_api_key:
-            raise ValueError("COHERE_API_KEY is required")
-
-        if not settings.qdrant_url:
-            raise ValueError("QDRANT_URL is required")
-
-        logger.info("Configuration validated successfully")
-
-        # Additional startup tasks can go here
-        logger.info("Application starting up...")
-    except Exception as e:
-        logger.error(f"Startup failed: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Startup failed: {str(e)}")
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    # Cleanup resources
-    print("Application shutting down...")
+# Dependency injection for services
+@app.get("/health")
+async def health_check(
+    chat_service = Depends(get_chat_service),
+    rag_service = Depends(get_rag_service)
+):
+    # Test that services can be instantiated
+    return {"status": "healthy", "message": "All services are running"}

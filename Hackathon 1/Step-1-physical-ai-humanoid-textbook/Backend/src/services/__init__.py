@@ -5,6 +5,10 @@ import time
 from src.utils.logging import setup_logging
 
 
+# Import validation helper
+from .validation_helper import validate_query_format
+
+
 class BaseService(ABC):
     """
     Base service class providing common functionality for all services

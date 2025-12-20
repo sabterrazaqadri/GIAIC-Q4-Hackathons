@@ -54,11 +54,11 @@ def get_embedding(text):
 def retrieve(query: str) -> list[str]:
     embedding = get_embedding(query)
     result = qdrant.query_points(
-        collection_name="physical_ai_humanoid_textbook",
+        collection_name="textbook_content",  # Use the correct collection name
         query=embedding,
         limit=5
     )
-    return [point.payload["text"] for point in result.points]
+    return [point.payload["content"] for point in result.points]
 
 
 # Define request/response models
@@ -214,15 +214,66 @@ async def chat_endpoint(request: ChatRequest):
         {context}
         """
 
-        # Generate response using Cohere
-        response = cohere_client.generate(
-            model='command-r-plus',  # Using a generative model
-            prompt=prompt,
-            max_tokens=500,
+        # Generate response using Cohere Chat API
+        response = cohere_client.chat(
+            model='command-r-plus-08-2024',  # Using a generative model
+            message=request.message,
+            documents=[{"title": f"Document {i}", "snippet": doc} for i, doc in enumerate(retrieved_docs, 1)],
             temperature=0.3,
         )
 
-        return ChatResponse(response=response.generations[0].text.strip())
+        return ChatResponse(response=response.text.strip())
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing chat request: {str(e)}")
+
+
+# Import the new modular structure
+from src.main import app as modular_app
+
+# Define request/response models for backward compatibility
+class ChatRequest(BaseModel):
+    message: str
+
+
+class ChatResponse(BaseModel):
+    response: str
+
+
+# Add the legacy /chat endpoint for backward compatibility
+@app.post("/chat", response_model=ChatResponse)
+async def chat_endpoint_legacy(request: ChatRequest):
+    """
+    Legacy endpoint for backward compatibility.
+    This endpoint will be phased out in favor of the new /chat/completions endpoint.
+    """
+    try:
+        # This endpoint now uses the new modular structure
+        # For now, we'll simulate a call to the new structure
+        # In a real implementation, this would interface with the new services
+        from src.chat.models import UserQuery
+        from src.chat.services import ChatService
+        from src.rag.services import RAGService
+        import uuid
+        from datetime import datetime
+
+        # Create a user query from the legacy request
+        user_query = UserQuery(
+            id=str(uuid.uuid4()),
+            content=request.message,
+            selected_text=None,
+            timestamp=datetime.now(),
+            session_id=None,
+            user_id=None
+        )
+
+        # Initialize services
+        chat_service = ChatService()
+        rag_service = RAGService()
+
+        # Process the query using the new structure
+        response = await chat_service.process_query(user_query, rag_service, temperature=0.7, session_id=None)
+
+        return ChatResponse(response=response.content)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing chat request: {str(e)}")
 
@@ -232,39 +283,13 @@ def read_root():
     return {"message": "Physical AI & Humanoid Robotics Chatbot API"}
 
 
-# -------------------------------------
-# MAIN INGESTION PIPELINE
-# -------------------------------------
-def ingest_book():
-    urls = get_all_urls(SITEMAP_URL)
-
-    create_collection()
-
-    global_id = 1
-
-    for url in urls:
-        print("\nProcessing:", url)
-        text = extract_text_from_url(url)
-
-        if not text:
-            continue
-
-        chunks = chunk_text(text)
-
-        for ch in chunks:
-            save_chunk_to_qdrant(ch, global_id, url)
-            print(f"Saved chunk {global_id}")
-            global_id += 1
-
-    print("\n✔️ Ingestion completed!")
-    print("Total chunks stored:", global_id - 1)
-
-
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1 and sys.argv[1] == "--serve":
-        # Run the API server
-        uvicorn.run(app, host="0.0.0.0", port=8000)
+        # Run the API server with the new modular app
+        uvicorn.run("src.main:app", host="0.0.0.0", port=8000, reload=True)
     else:
         # Run the ingestion pipeline by default
+        # This would be the original ingestion functionality
+        # For now, we'll call the original function
         ingest_book()

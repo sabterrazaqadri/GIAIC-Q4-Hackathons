@@ -20,6 +20,11 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
+  // Custom fields to expose environment variables to client side
+  customFields: {
+    apiUrl: process.env.REACT_APP_API_URL || 'http://localhost:8001/api/v1/chat/completions',
+  },
+
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'your-organization', // Usually your GitHub org/user name.

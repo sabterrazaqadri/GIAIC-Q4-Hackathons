@@ -20,6 +20,12 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 #     openai_client=provider
 # )
 
+# Initialize OpenAI model
+model = OpenAIChatCompletionsModel(
+    model="gpt-4o-mini",
+    openai_client=AsyncOpenAI(api_key=OPENAI_API_KEY)
+)
+
 import cohere
 from qdrant_client import QdrantClient
 
@@ -45,19 +51,21 @@ def get_embedding(text):
 
 @function_tool
 def retrieve(query: str) -> list[str]:
+    """Retrieve relevant content from the textbook based on the query."""
     embedding = get_embedding(query)
     result = qdrant.query_points(
-        collection_name="physical_ai_humanoid_textbook",
+        collection_name="textbook_content",
         query=embedding,
         limit=5
     )
-    return [point.payload["text"] for point in result.points]
+    return [point.payload.get("content", point.payload.get("text", "")) for point in result.points]
 
 
 
 
 agent = Agent(
     name="Assistant",
+    model=model,
     instructions="""
 You are an AI tutor for the Physical AI & Humanoid Robotics textbook.
 To answer the user question, first call the tool `retrieve` with the user query.

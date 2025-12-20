@@ -38,7 +38,7 @@ Establish the foundational components that all user stories depend on.
 - [x] T007 Implement CORS configuration in Backend/src/config/settings.py
 - [x] T008 Update settings module to allow frontend communication without config changes in Backend/src/config/settings.py
 - [x] T009 Create API response formatter in Backend/src/services/ following data-model.md
-- [ ] T010 Create endpoint validation helper in Backend/src/services/ for query format validation
+- [x] T010 Create endpoint validation helper in Backend/src/services/ for query format validation
 
 ## Phase 3: User Story 1 - Frontend Developer Integration (P1)
 
@@ -52,12 +52,12 @@ Can be fully tested by making API calls from a frontend application and receivin
 
 ### Implementation Tasks
 
-- [ ] T011 [P] [US1] Create QueryRequest Pydantic model in Backend/src/api/models.py
-- [ ] T012 [P] [US1] Create AgentResponse Pydantic model in Backend/src/api/models.py
-- [ ] T013 [P] [US1] Create ErrorResponse Pydantic model in Backend/src/api/models.py
-- [ ] T014 [US1] Implement /api/v1/rag/query POST endpoint in Backend/src/api/routes/rag.py
-- [ ] T015 [US1] Add request validation for question and selected_text length in Backend/src/api/routes/rag.py
-- [ ] T016 [US1] Document the API endpoint according to OpenAPI spec in contracts/openapi.yaml
+- [x] T011 [P] [US1] Create QueryRequest Pydantic model in Backend/src/api/models.py
+- [x] T012 [P] [US1] Create AgentResponse Pydantic model in Backend/src/api/models.py
+- [x] T013 [P] [US1] Create ErrorResponse Pydantic model in Backend/src/api/models.py
+- [x] T014 [US1] Implement /api/v1/rag/query POST endpoint in Backend/src/api/routes/rag.py
+- [x] T015 [US1] Add request validation for question and selected_text length in Backend/src/api/routes/rag.py
+- [x] T016 [US1] Document the API endpoint according to OpenAPI spec in contracts/openapi.yaml
 
 ## Phase 4: User Story 2 - Textbook Content Querying (P2)
 
@@ -71,10 +71,10 @@ Can be tested by submitting various question types through the API and verifying
 
 ### Implementation Tasks
 
-- [ ] T017 [US2] Integrate with existing RAG agent for processing queries in Backend/src/api/routes/rag.py
-- [ ] T018 [US2] Implement handling for selected text context in queries in Backend/src/api/routes/rag.py
-- [ ] T019 [US2] Ensure response includes source citations in Backend/src/api/routes/rag.py
-- [ ] T020 [US2] Add performance monitoring to ensure response times in Backend/src/api/routes/rag.py
+- [x] T017 [US2] Integrate with existing RAG agent for processing queries in Backend/src/api/routes/rag.py
+- [x] T018 [US2] Implement handling for selected text context in queries in Backend/src/api/routes/rag.py
+- [x] T019 [US2] Ensure response includes source citations in Backend/src/api/routes/rag.py
+- [x] T020 [US2] Add performance monitoring to ensure response times in Backend/src/api/routes/rag.py
 
 ## Phase 5: User Story 3 - API Stability and Error Handling (P3)
 
@@ -88,21 +88,21 @@ Can be tested by simulating various error conditions and measuring response time
 
 ### Implementation Tasks
 
-- [ ] T021 [US3] Add timeout handling for API requests in Backend/src/api/routes/rag.py
-- [ ] T022 [US3] Implement structured error responses for validation errors in Backend/src/api/routes/rag.py
-- [ ] T023 [US3] Add error handling for external service failures in Backend/src/api/routes/rag.py
-- [ ] T024 [US3] Create query validation endpoint in Backend/src/api/routes/rag.py
+- [x] T021 [US3] Add timeout handling for API requests in Backend/src/api/routes/rag.py
+- [x] T022 [US3] Implement structured error responses for validation errors in Backend/src/api/routes/rag.py
+- [x] T023 [US3] Add error handling for external service failures in Backend/src/api/routes/rag.py
+- [x] T024 [US3] Create query validation endpoint in Backend/src/api/routes/rag.py
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
 Final polish and cross-cutting concerns that apply to the entire feature.
 
-- [ ] T025 Add comprehensive API documentation in Backend/docs/api.md
-- [ ] T026 Perform overall system testing for all user stories in Backend/tests/integration/test_end_to_end.py
-- [ ] T027 Add performance testing and optimization in Backend/tests/performance/
-- [ ] T028 Add security review and implement security measures in Backend/src/api/middleware/
-- [ ] T029 Write comprehensive README documentation for the feature in Backend/README.md
-- [ ] T030 Prepare the service for deployment in Backend/Dockerfile
+- [x] T025 Add comprehensive API documentation in Backend/docs/api.md
+- [x] T026 Perform overall system testing for all user stories in Backend/tests/integration/test_end_to_end.py
+- [x] T027 Add performance testing and optimization in Backend/tests/performance/
+- [x] T028 Add security review and implement security measures in Backend/src/api/middleware/
+- [x] T029 Write comprehensive README documentation for the feature in Backend/README.md
+- [x] T030 Prepare the service for deployment in Backend/Dockerfile
 
 ## Parallel Execution Opportunities
 

@@ -1,0 +1,281 @@
+openapi: 3.0.0
+info:
+  title: ChatKit RAG Integration API
+  description: API for integrating OpenAI ChatKit with the RAG system for the Physical AI & Humanoid Robotics textbook
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  /chat/completions:
+    post:
+      summary: Create a chat completion using the RAG system
+      description: Process a user query through the RAG system and return a response based on the textbook content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful response with AI-generated content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Bad request - invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  
+  /chat/validate:
+    post:
+      summary: Validate a query against the RAG system
+      description: Check if a query can be answered using the available textbook content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidationRequest'
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+        '400':
+          description: Bad request - invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - messages
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          description: The messages comprising the conversation so far
+        selected_text:
+          type: string
+          description: Optional selected text from the textbook to focus the response
+        session_id:
+          type: string
+          description: Optional session identifier for maintaining conversation context
+        user_id:
+          type: string
+          description: Optional user identifier
+        temperature:
+          type: number
+          minimum: 0
+          maximum: 1
+          default: 0.7
+          description: Controls randomness in the response
+      example:
+        messages:
+          - role: "user"
+            content: "Explain the concept of inverse kinematics in humanoid robotics"
+        selected_text: "Inverse kinematics is the mathematical process of calculating the joint angles..."
+        session_id: "sess_abc123"
+        temperature: 0.5
+
+    Message:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          type: string
+          enum: [system, user, assistant]
+          description: The role of the message author
+        content:
+          type: string
+          description: The content of the message
+      example:
+        role: "user"
+        content: "How does a humanoid robot maintain balance?"
+
+    ChatResponse:
+      type: object
+      required:
+        - id
+        - object
+        - created
+        - model
+        - choices
+        - usage
+        - retrieved_context
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the chat completion
+        object:
+          type: string
+          description: Object type, always 'chat.completion'
+        created:
+          type: integer
+          description: Unix timestamp of when the completion was created
+        model:
+          type: string
+          description: The model used for the completion
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Choice'
+        usage:
+          $ref: '#/components/schemas/Usage'
+        retrieved_context:
+          type: array
+          items:
+            $ref: '#/components/schemas/RetrievedContext'
+          description: Context chunks retrieved from the textbook
+
+    Choice:
+      type: object
+      required:
+        - index
+        - message
+        - finish_reason
+      properties:
+        index:
+          type: integer
+          description: The index of the choice in the list
+        message:
+          $ref: '#/components/schemas/Message'
+        finish_reason:
+          type: string
+          description: The reason the model stopped generating (e.g., stop, length)
+
+    Usage:
+      type: object
+      required:
+        - prompt_tokens
+        - completion_tokens
+        - total_tokens
+      properties:
+        prompt_tokens:
+          type: integer
+          description: Number of tokens in the prompt
+        completion_tokens:
+          type: integer
+          description: Number of tokens in the generated completion
+        total_tokens:
+          type: integer
+          description: Total number of tokens used
+
+    RetrievedContext:
+      type: object
+      required:
+        - id
+        - content
+        - source_document
+        - similarity_score
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the context chunk
+        content:
+          type: string
+          description: The text content from the textbook
+        source_document:
+          type: string
+          description: Reference to the original document
+        page_number:
+          type: integer
+          description: Page number in the original document
+        section_title:
+          type: string
+          description: Title of the section containing the content
+        similarity_score:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Score representing how relevant this context is to the query
+
+    ValidationRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The query to validate against textbook content
+        selected_text:
+          type: string
+          description: Optional selected text to focus the validation
+
+    ValidationResponse:
+      type: object
+      required:
+        - is_valid
+        - confidence
+        - relevant_sources
+      properties:
+        is_valid:
+          type: boolean
+          description: Whether the query can be answered with available content
+        confidence:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Confidence level in the validation result
+        relevant_sources:
+          type: array
+          items:
+            type: string
+          description: List of relevant source documents
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - message
+          properties:
+            message:
+              type: string
+              description: A human-readable error message
+            type:
+              type: string
+              description: The error type
+            code:
+              type: string
+              description: A specific error code

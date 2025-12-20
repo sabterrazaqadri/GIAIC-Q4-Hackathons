@@ -135,23 +135,13 @@ def get_metrics():
         "timestamp": time.time()
     }
 
-# Security headers middleware
-class SecurityMiddleware(BaseHTTPMiddleware):
-    async def dispatch(self, request: Request, call_next):
-        response = await call_next(request)
-
-        # Add security headers
-        response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["X-Frame-Options"] = "DENY"  # Prevent clickjacking
-        response.headers["X-XSS-Protection"] = "1; mode=block"
-        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
-        response.headers["Referrer-Policy"] = "no-referrer-when-downgrade"
-        response.headers["Content-Security-Policy"] = "default-src 'self'"
-
-        return response
+# Import and add comprehensive security middleware
+from src.api.middleware.security import SecurityMiddleware, RateLimitMiddleware, InputValidationMiddleware
 
 # Add security middleware
 app.add_middleware(SecurityMiddleware)
+app.add_middleware(RateLimitMiddleware, max_requests_per_minute=60)
+app.add_middleware(InputValidationMiddleware)
 
 # Add CORS middleware
 app.add_middleware(

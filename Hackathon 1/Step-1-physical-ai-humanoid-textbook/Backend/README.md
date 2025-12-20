@@ -166,10 +166,23 @@ Backend/
 ├── src/
 │   ├── agents/          # RAG agent implementation
 │   ├── api/             # FastAPI endpoints
+│   │   ├── middleware/  # Security and other middleware
+│   │   └── routes/      # API route definitions
 │   ├── config/          # Configuration settings
 │   ├── models/          # Data models
 │   ├── services/        # Business logic services
 │   └── utils/           # Utility functions
 ├── tests/               # Unit and integration tests
+│   ├── integration/     # Integration tests
+│   ├── performance/     # Performance tests
+│   └── unit/            # Unit tests
+├── docs/                # Documentation
 └── requirements.txt     # Python dependencies
 ```
+
+## Additional Documentation
+
+For more detailed documentation, see:
+- [API Documentation](./docs/api.md) - Complete API reference
+- [Performance Tests](./tests/performance/test_performance.py) - Performance test suite
+- [Integration Tests](./tests/integration/test_end_to_end.py) - End-to-end test scenarios
