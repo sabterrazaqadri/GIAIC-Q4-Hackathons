@@ -1,0 +1,215 @@
+# ROS 2 Interfaces Contract: Educational Examples
+
+**Feature**: 002-ros2-fundamentals | **Date**: December 16, 2025
+
+## Overview
+
+This contract defines the ROS 2 interfaces (topics, services, messages) that will be taught and used in the educational examples for the ROS 2 fundamentals module. These interfaces serve as the "API" that students will learn to work with when connecting AI agents to ROS 2 controllers.
+
+## Message Definitions
+
+### RobotCommand.msg
+```
+# Command message for basic robot control
+string command_type    # e.g., "move_forward", "turn", "stop"
+float64[] parameters   # command-specific parameters
+time timestamp        # when the command was generated
+string source_id      # identifier of the command source (for AI agents)
+```
+
+### SensorData.msg
+```
+# Sensor data from robot sensors
+string sensor_type     # e.g., "lidar", "camera", "imu"
+float64[] data         # sensor readings
+time timestamp        # when data was captured
+string robot_id       # identifier of the robot
+```
+
+### HumanoidJointState.msg
+```
+# Joint state for humanoid robot
+string[] joint_names     # Names of the joints
+float64[] positions     # Joint positions
+float64[] velocities    # Joint velocities
+float64[] efforts       # Joint efforts
+string robot_id        # identifier of the humanoid robot
+```
+
+## Service Definitions
+
+### ExecuteAction.srv
+```
+# Request
+string action_name      # Name of action to execute
+float64[] action_params # Parameters for the action
+string executor_id      # ID of the entity requesting the action
+
+---
+# Response
+bool success            # Whether the action was successful
+string message          # Additional information about the result
+float64 execution_time  # Time taken to execute the action
+```
+
+### GetRobotState.srv
+```
+# Request
+string robot_id         # ID of the robot to query
+
+---
+# Response
+bool success            # Whether the query was successful
+string state_json       # Robot state in JSON format
+string error_message    # Error details if success is false
+```
+
+## Topic Definitions
+
+### /robot/command
+- **Message Type**: `RobotCommand.msg`
+- **Direction**: Publisher (from AI agent to robot)
+- **Description**: Topic for sending movement and control commands to the robot
+- **QoS**: Reliable delivery, transient local durability
+- **Usage**: Used by AI agents to send control commands to the robot
+
+### /robot/sensors
+- **Message Type**: `SensorData.msg`
+- **Direction**: Subscriber (from robot to AI agent)
+- **Description**: Topic for receiving sensor data from the robot
+- **QoS**: Best effort for real-time data
+- **Usage**: Used by AI agents to receive sensor information from the robot
+
+### /joint_states
+- **Message Type**: `HumanoidJointState.msg`
+- **Direction**: Subscriber (from robot to AI agent)
+- **Description**: Topic for receiving joint positions of the humanoid robot
+- **QoS**: Reliable delivery
+- **Usage**: Used by AI agents to understand the current pose of the robot
+
+### /ai_agent/output
+- **Message Type**: `RobotCommand.msg`
+- **Direction**: Publisher (from AI agent to controller)
+- **Description**: Topic for AI agents to publish their control decisions
+- **QoS**: Reliable delivery
+- **Usage**: Output channel for AI agents to send their decisions
+
+## Action Definitions (Future Extension)
+
+### NavigateToGoal.action
+```
+# Goal
+geometry_msgs/PoseStamped target_pose
+
+# Result
+string message
+int32 result_code
+
+# Feedback
+string message
+float64 distance_to_goal
+```
+
+## Quality of Service (QoS) Profiles
+
+### Sensor Data Profile
+- **Reliability**: best_effort
+- **Durability**: volatile
+- **History**: keep_last
+- **Depth**: 10
+
+### Command Profile
+- **Reliability**: reliable
+- **Durability**: volatile
+- **History**: keep_last
+- **Depth**: 1
+
+### State Profile
+- **Reliability**: reliable
+- **Durability**: volatile
+- **History**: keep_last
+- **Depth**: 1
+
+## Naming Conventions
+
+### Topics
+- Use forward slashes to separate namespaces: `/namespace/sub_namespace/topic_name`
+- Use lowercase with underscores: `robot_command`, `sensor_data`
+- Use descriptive names that indicate purpose: `/robot/cmd_vel`, `/robot/laser_scan`
+
+### Services
+- Follow same naming conventions as topics: `/namespace/service_name`
+- Use action-oriented names: `/robot/move_to_pose`, `/robot/get_state`
+
+### Messages
+- Use PascalCase for custom messages: `RobotCommand`, `SensorData`
+- Include descriptive field names using snake_case: `command_type`, `robot_id`
+
+## Example Usage Patterns
+
+### Publisher Example
+```python
+# Create publisher for robot commands
+publisher = node.create_publisher(RobotCommand, '/robot/command', 10)
+
+# Publish a command
+msg = RobotCommand()
+msg.command_type = 'move_forward'
+msg.parameters = [0.5]  # Move at 0.5 m/s
+msg.timestamp = node.get_clock().now().to_msg()
+msg.source_id = 'ai_agent_1'
+publisher.publish(msg)
+```
+
+### Subscriber Example
+```python
+# Create subscriber for sensor data
+subscriber = node.create_subscription(
+    SensorData,
+    '/robot/sensors',
+    sensor_callback,
+    10
+)
+
+def sensor_callback(msg):
+    # Process sensor data from robot
+    print(f"Received sensor data: {msg.data}")
+```
+
+### Service Client Example
+```python
+# Create service client
+client = node.create_client(ExecuteAction, '/robot/execute_action')
+
+# Wait for service to be available
+while not client.wait_for_service(timeout_sec=1.0):
+    print("Service not available, waiting again...")
+
+# Send request
+request = ExecuteAction.Request()
+request.action_name = 'move_to_location'
+request.action_params = [1.0, 2.0, 0.0]  # x, y, theta
+request.executor_id = 'ai_agent_1'
+
+future = client.call_async(request)
+```
+
+### Service Server Example
+```python
+# Create service server
+service = node.create_service(
+    ExecuteAction, 
+    '/robot/execute_action', 
+    execute_action_callback
+)
+
+def execute_action_callback(request, response):
+    # Execute the requested action
+    success = perform_action(request.action_name, request.action_params)
+    
+    response.success = success
+    response.message = "Action completed" if success else "Action failed"
+    response.execution_time = 0.1  # Example execution time
+    
+    return response
+```
