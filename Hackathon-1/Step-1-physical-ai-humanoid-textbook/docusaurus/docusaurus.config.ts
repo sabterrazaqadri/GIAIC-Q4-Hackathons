@@ -22,7 +22,7 @@ const config: Config = {
 
   // Custom fields to expose environment variables to client side
   customFields: {
-    apiUrl: process.env.REACT_APP_API_URL || 'https://hackathon-1-backend.onrender.com/api/v1/chat/completions',
+    apiUrl: process.env.REACT_APP_API_URL || 'http://localhost:8000/api/v1/chat/completions',
   },
 
   // GitHub pages deployment config.
