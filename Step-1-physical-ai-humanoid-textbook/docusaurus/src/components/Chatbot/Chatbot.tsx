@@ -10,7 +10,7 @@ interface Message {
 
 const Chatbot: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
-  const apiUrl = (siteConfig.customFields?.apiUrl as string) || 'https://q4-hackathon-backend.onrender.com/api/v1/chat/completions';
+  const apiUrl = (siteConfig.customFields?.apiUrl as string) || 'https://q4-hackathon-backend.onrender.com/chat/completions';
 
   const [messages, setMessages] = useState<Message[]>([
     {
